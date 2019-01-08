@@ -31,9 +31,9 @@ public class CryptfsCommands {
     private static final String CRYPTFS_CHANGEPW_PASSWORD_CMD = VDC_CMD_PATH
             + " cryptfs changepw password '%s'";
     private static final String CRYPTFS_CHANGEPW_PIN_CM_CMD = VDC_CMD_PATH
-            + " cryptfs changepw pin '%s' '%s'";
+            + " cryptfs changepw pin '%s'";
     private static final String CRYPTFS_CHANGEPW_PASSWORD_CM_CMD = VDC_CMD_PATH
-            + " cryptfs changepw password '%s' '%s'";
+            + " cryptfs changepw password '%s'";
 
     private static final String CRYPTFS_GETPWTYPE_CMD = VDC_CMD_PATH
             + " cryptfs getpwtype";
@@ -173,9 +173,7 @@ public class CryptfsCommands {
             command = isCyanogenmod13 ? CRYPTFS_CHANGEPW_PIN_CM_CMD
                                       : CRYPTFS_CHANGEPW_PIN_CMD;
         }
-        List<String> response = SuShell.run("su",
-                isCyanogenmod13 ? String.format(command, encodedOldPassword, encodedNewPassword)
-                                : String.format(command, encodedNewPassword));
+        List<String> response = SuShell.run("su", String.format(command, encodedNewPassword));
 
         boolean changeResult = checkVdcResponse(response);
         boolean verifyResult = checkCryptfsPasswordLollipop(newPassword);
